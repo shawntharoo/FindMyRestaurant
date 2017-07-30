@@ -12,6 +12,8 @@ import { RegisterPage } from '../pages/Register/Register';
 import { AuthService } from '../pages/providers/auth.service';
 import { RestaurantsPage } from '../pages/Restaurants/Restaurants';
 import { SelectionPage } from '../pages/Selection/Selection';
+import { OLoginPage } from '../pages/OLogin/OLogin';
+import { ORegisterPage } from '../pages/ORegister/ORegister';
 
 //Firebase configurations and imports
 import { AngularFireModule } from 'angularfire2';
@@ -33,7 +35,9 @@ export const firebaseConfig = {
     LoginPage,
     RegisterPage,
     RestaurantsPage,
-    SelectionPage
+    SelectionPage,
+    OLoginPage,
+    ORegisterPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ export const firebaseConfig = {
     LoginPage,
     RegisterPage,
     RestaurantsPage,
-    SelectionPage
+    SelectionPage,
+    OLoginPage,
+    ORegisterPage
   ],
   providers: [
     StatusBar,

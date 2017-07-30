@@ -25,7 +25,7 @@ export class OLoginPage {
   });
     this.email = this.password = '';
 
-   // this.navCtrl.push(TabsPage); 
+   // this.navCtrl.push(OwnerTabsPage); 
   }
 
   logout() {

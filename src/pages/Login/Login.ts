@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from '../providers/auth.service';
 import { RegisterPage } from '../Register/Register';
-import { OwnerTabsPage } from '../OwnerTabs/OwnerTabs';
+import { TabsPage } from '../tabs/tabs';
 @Component({
   selector: 'Page-Login',
   templateUrl: 'Login.html',
@@ -25,7 +25,7 @@ export class LoginPage {
   });
     this.email = this.password = '';
 
-   // this.navCtrl.push(OwnerTabsPage); 
+    this.navCtrl.push(TabsPage); 
   }
 
   logout() {

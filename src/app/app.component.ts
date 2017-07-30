@@ -14,7 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 })
 export class MyApp {
   //Change the rootpage to selectionpage
-  rootPage:any = TabsPage;
+  rootPage:any = SelectionPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

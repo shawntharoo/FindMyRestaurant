@@ -22,7 +22,7 @@
     </ion-list>
 
     <button ion-button full (click)="login()" [disabled]="!email || !password">Login</button>
-    <button class=RegisterBut ion-button clear (click)="NavigateToLink()"> Register </button>
   </ion-card>
+    <button class=RegisterBut ion-button clear (click)="NavigateToLink()"> Register </button>
     <button class=LogoutBut ion-button clear (click)="logout()" *ngIf="authService.user | async"> Logout </button>
 </ion-content>

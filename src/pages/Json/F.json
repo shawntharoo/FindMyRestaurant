@@ -1,0 +1,8 @@
+{
+  "UserProfile": {
+    "FoodCategory":["Cheese", "Rice", "Snacks"],
+    "LivingPlace":["Makola", "Kandy", "Jaffna"],
+    "UserEmail":["Tharooshawn@gmail.com", "test1@gmail.com", "test2@gmail.com"],
+    "Username":["Shawn","Test1","Test2"]
+  }
+}

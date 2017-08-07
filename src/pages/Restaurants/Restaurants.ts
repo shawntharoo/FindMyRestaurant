@@ -11,8 +11,8 @@ export class RestaurantsPage {
   items: FirebaseListObservable<any[]>;
   constructor(public navCtrl: NavController, public af: AngularFireDatabase) {
     this.items = af.list('/Restaurants/');
-
+    this.items.subscribe(res => console.log(res[0].$key));
     //Add data to the firebase
-    //this.af.list('/UserProfile/').push({Username :"Shawn", UserEmail : "tharooshawn@gmail.com", LivingPlace :"Makola", FoodCategory: "Bun"}); 
+    //this.af.list('/UserProfile/tharoo@gmail').push({Username :"Shawn", UserEmail : "tharooshawn@gmail.com", LivingPlace :"Makola", FoodCategory: "Bun"}); 
   }
 }

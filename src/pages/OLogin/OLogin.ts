@@ -2,15 +2,10 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from '../providers/auth.service';
 import { ORegisterPage } from '../ORegister/ORegister';
-import { TabsPage } from '../tabs/tabs';
+import { OwnerTabsPage } from '../OwnerTabs/OwnerTabs';
 @Component({
   selector: 'Page-OLogin',
   templateUrl: 'OLogin.html',
- /* styles: [`
-  .RegisterBut {
-        font-size: 17px;
-    }
-  `]*/
 })
 export class OLoginPage {
   email: string;
@@ -18,7 +13,7 @@ export class OLoginPage {
   public value;
   constructor(public authService: AuthService, public navCtrl : NavController) {}
 
-  login() {
+ /* login() {
     this.authService.login(this.email, this.password).then(function(firebaseUser) {
    })
   .catch(function(error) {
@@ -26,7 +21,7 @@ export class OLoginPage {
     this.email = this.password = '';
 
    // this.navCtrl.push(OwnerTabsPage); 
-  }
+  }*/
 
   logout() {
     this.authService.logout();

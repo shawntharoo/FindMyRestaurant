@@ -17,7 +17,7 @@ export class RegisterPage {
 
   signup() {
     this.authService.signup(this.Remail, this.Rpassword);
-    //this.navCtrl.push(TabsPage); 
+    this.navCtrl.push(TabsPage); 
     this.Remail = this.Rpassword = '';
   }
 

@@ -24,5 +24,6 @@
     <button ion-button full (click)="login()" [disabled]="!email || !password">Login as a seeker</button>
   </ion-card>
     <button class=RegisterBut ion-button clear (click)="NavigateToLink()"> Register </button>
+    <button class=ResetBut ion-button clear (click)="passwordResetPrompt()"> Forgot Password </button>
     <button class=LogoutBut ion-button clear (click)="logout()" *ngIf="authService.user | async"> Logout </button>
 </ion-content>

@@ -14,6 +14,9 @@ import { RestaurantsPage } from '../pages/Restaurants/Restaurants';
 import { SelectionPage } from '../pages/Selection/Selection';
 import { OLoginPage } from '../pages/OLogin/OLogin';
 import { ORegisterPage } from '../pages/ORegister/ORegister';
+import { OwnerTabsPage } from '../pages/OwnerTabs/OwnerTabs';
+import { SeekerProfilePage } from '../pages/SeekerProfile/SeekerProfile';
+import { AlertsService } from '../pages/providers/alerts.service';
 
 //Firebase configurations and imports
 import { AngularFireModule } from 'angularfire2';
@@ -37,7 +40,9 @@ export const firebaseConfig = {
     RestaurantsPage,
     SelectionPage,
     OLoginPage,
-    ORegisterPage
+    ORegisterPage,
+    SeekerProfilePage,
+    OwnerTabsPage
   ],
   imports: [
     BrowserModule,
@@ -55,12 +60,15 @@ export const firebaseConfig = {
     RestaurantsPage,
     SelectionPage,
     OLoginPage,
-    ORegisterPage
+    ORegisterPage,
+    SeekerProfilePage,
+    OwnerTabsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AuthService,
+    AlertsService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

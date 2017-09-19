@@ -2,19 +2,14 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { SelectionPage } from '../pages/Selection/Selection';
-
-//Delete this later
-import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from '../pages/Login/Login';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  //Change the rootpage to selectionpage
-  rootPage:any = SelectionPage;
+  rootPage:any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

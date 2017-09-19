@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { RestaurantsPage } from '../Restaurants/Restaurants';
-import { SeekerProfilePage } from '../SeekerProfile/SeekerProfile';
+import { SeekerSettingsPage } from '../SeekerSettings/SeekerSettings';
 @Component({
-  templateUrl: 'tabs.html'
+  templateUrl: 'SeekerTabs.html'
 })
-export class TabsPage {
+export class SeekerTabsPage {
 
   tab1Root = RestaurantsPage;
-  tab3Root = SeekerProfilePage;
+  tab3Root = SeekerSettingsPage;
 
   constructor() {
 

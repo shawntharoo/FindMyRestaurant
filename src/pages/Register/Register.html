@@ -8,7 +8,7 @@
 
 <ion-content class="card-background-page">
   <ion-card text-center>
-    <div text-align: center>Register as a seeker </div>
+    <div text-align: center>Register</div>
     <img width="50" height="200" src="../../assets/images/registe.png" />
     <ion-list>
       <ion-item>
@@ -20,8 +20,23 @@
         <ion-input type="password" [(ngModel)]="Rpassword"></ion-input>
       </ion-item>
     </ion-list>
+    <form [formGroup]="langForm">
+      <ion-list radio-group formControlName="langs">
+        <ion-list-header>
+          Select Role
+        </ion-list-header>
+        <ion-item>
+          <ion-label>I am a Seeker</ion-label>
+          <ion-radio checked="true" value="seeker"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>I am a Owner</ion-label>
+          <ion-radio value="owner"></ion-radio>
+        </ion-item>
+      </ion-list>
+    </form>
 
     <button ion-button full (click)="signup()" [disabled]="!Remail || !Rpassword">Register</button>
   </ion-card>
-    <button class=LoginBut ion-button clear (click)="NavigateToLink()"> Login </button>
+  <button class=LoginBut ion-button clear (click)="NavigateToLink()"> Login </button>
 </ion-content>

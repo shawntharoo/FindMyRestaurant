@@ -1,25 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { handleDataService } from '../providers/handleData.service';
+import { seekerData } from '../../Models/SeekerDetails';
 
 @Component({
   selector: 'Page-SeekerSettings',
   templateUrl: 'SeekerSettings.html'
 })
 
-export class SeekerSettingsPage {
+export class SeekerSettingsPage implements OnInit {
 
   captureDataUrl: string;
-  profile: FirebaseObjectObservable<any[]>;
+  profile: FirebaseObjectObservable<seekerData[]>;
   private imageSrc: string;
+  userImage: string;
+  editMode: boolean = false;
+
   constructor(public navCtrl: NavController, public af: AngularFireDatabase, private camera: Camera, public handleService: handleDataService) {
-    this.handleService.seekerDetails();
-    // this.profile = af.object('/UserProfile/tharoo@gmail');
-    //  this.profile.subscribe(snapshot => {
+    // af.object('/UserProfile/s@g,com').subscribe(snapshot => {
     //     console.log(snapshot);
     // });
+  }
+
+  ngOnInit() {
+    this.handleService.getUserEmail().subscribe(res => {
+      this.handleService.seekerDetails(res.email).subscribe(response => {
+        this.profile = response;
+      });
+      this.handleService.firebaseStorageDownload(res.email).then(url => this.userImage = url);
+    })
   }
 
   capture() {
@@ -58,6 +69,10 @@ export class SeekerSettingsPage {
     } else {
       this.handleService.upload(this.imageSrc);
     }
+  }
+
+  toggleMode() {
+    this.editMode = !this.editMode;
   }
 
 }

@@ -1,0 +1,1 @@
+export { seekerData } from './SeekerDetails';

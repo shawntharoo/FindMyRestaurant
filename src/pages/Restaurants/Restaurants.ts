@@ -11,6 +11,6 @@ export class RestaurantsPage {
   items: FirebaseListObservable<any[]>;
   constructor(public navCtrl: NavController, public af: AngularFireDatabase) {
     this.items = af.list('/Restaurants/');
-    this.items.subscribe(res => console.log(res[0].$key));
+    // this.items.subscribe(res => console.log(res[0].$key));
   }
 }

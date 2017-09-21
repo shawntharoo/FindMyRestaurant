@@ -9,7 +9,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
 @Injectable()
 export class handleDataService {
     validEmail: string;
-    public loggedInUser;
+    public userProfile;
+    storageRef: firebase.storage.Reference;
+
     constructor(public alertService: AlertsService, public authService: AuthService, public af: AngularFireDatabase) {
     }
 
@@ -58,9 +60,27 @@ export class handleDataService {
         });
     }
 
-    seekerDetails() {
-        this.loggedInUser = this.authService.user.subscribe(res => {
-            this.af.list('/UserProfile/'+ this.emailToKey(res.email));
-        });
+    // seekerDetails() {
+    //      this.authService.user.subscribe(res => {
+    //         let useEmail = this.emailToKey(res.email);
+    //          this.userProfile = firebase.database().ref(`/UserProfile/${useEmail}`).limitToFirst(1);
+    //          console.log(this.userProfile);
+    //     });
+    // }
+
+    getUserEmail() {
+        return this.authService.user;
     }
+
+    seekerDetails(email) {
+        let userEmail = this.emailToKey(email);
+        return this.af.object('/UserProfile/' + userEmail);
+    }
+
+    firebaseStorageDownload(imageUrl) {
+        this.storageRef = firebase.storage().ref().child('SeekerProfile/'+imageUrl+'.jpg');
+        // this.storageRef.getDownloadURL().then(url => console.log(url));
+        return this.storageRef.getDownloadURL();
+    }
+
 }

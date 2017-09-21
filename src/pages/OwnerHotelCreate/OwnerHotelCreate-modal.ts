@@ -20,7 +20,6 @@ export class OwnerHotelCreateModalPage {
             name: ['', Validators.required],
             description: ['', Validators.required]
         });
-        handleService.seekerDetails();
     }
 
     closeModal() {

@@ -8,46 +8,56 @@
 
 <ion-content class="card-background-page">
   <ion-card>
-    <ion-card-title text-center>
-      tharoo shawn
+    <ion-card-title text-center *ngIf="profile">
+      {{profile.Username}}
     </ion-card-title>
     <ion-card-content>
-      <img src="img/nin-live.png" text-center/>
     </ion-card-content>
   </ion-card>
 
   <div text-center>
-    <button ion-button icon-right (click)="capture()" *ngIf="!captureDataUrl">
+    <div text-center>
+      <img *ngIf="userImage && !imageSrc && !captureDataUrl" [src]="userImage" />
+    </div>
+    <button ion-button color="light" icon-right (click)="capture()" *ngIf="!captureDataUrl">
             Take Picture
             <ion-icon name="camera"></ion-icon>
         </button>
-    <button ion-button icon-left on-tap="openGallery()" *ngIf="!imageSrc">
+    <button ion-button color="light" icon-left on-tap="openGallery()" *ngIf="!imageSrc">
             Choose Image
             <ion-icon name="image"></ion-icon>
         </button>
     <img [src]="captureDataUrl" *ngIf="captureDataUrl || imageSrc" />
-    <button ion-button icon-only (click)="uploadImage()" *ngIf="captureDataUrl || imageSrc">
+    <button ion-button color="light" icon-only (click)="uploadImage()" *ngIf="captureDataUrl || imageSrc">
           <ion-icon name="cloud-upload"></ion-icon>
         </button>
   </div>
 
-  <ion-card>
-    <ion-card-title>
-      Other Info
-    </ion-card-title>
+  <ion-buttons right>
+    <button ion-button (click)="toggleMode()">
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+  </ion-buttons>
+  <ion-card *ngIf="profile && !editMode">
+    <ion-title>
+      Primary Information
+    </ion-title>
     <ion-card-content>
       <ion-item>
-        <ion-label>Area</ion-label>
-        <ion-label>Area</ion-label>
+        <ion-label>Living Place</ion-label>
+        <ion-label>{{profile.LivingPlace}}</ion-label>
       </ion-item>
-
     </ion-card-content>
     <ion-card-content>
       <ion-item>
         <ion-label>Food Category</ion-label>
-        <ion-label>Area</ion-label>
+        <ion-label>{{profile.FoodCategory}}</ion-label>
       </ion-item>
-
     </ion-card-content>
   </ion-card>
+  <ion-card *ngIf="editMode">
+    Edit mode enabled
+  </ion-card>
+
 </ion-content>

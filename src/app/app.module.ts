@@ -23,6 +23,7 @@ import { OwnerHotelsDisplayPage } from '../pages/OwnerHotelsDisplay/OwnerHotelsD
 import { OwnerHotelCreateModalPage } from '../pages/OwnerHotelCreate/OwnerHotelCreate-modal';
 import { AlertsService } from '../pages/providers/alerts.service';
 import { handleDataService } from '../pages/providers/handleData.service';
+import { ResDetailPage } from '../pages/Restaurants/ResDetails/ResDetailPage';
 
 //Firebase configurations and imports
 import { AngularFireModule } from 'angularfire2';
@@ -47,7 +48,8 @@ export const firebaseConfig = {
     SeekerSettingsPage,
     OwnerTabsPage,
     OwnerHotelsDisplayPage,
-    OwnerHotelCreateModalPage
+    OwnerHotelCreateModalPage,
+    ResDetailPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ export const firebaseConfig = {
     SeekerSettingsPage,
     OwnerTabsPage,
     OwnerHotelsDisplayPage,
-    OwnerHotelCreateModalPage
+    OwnerHotelCreateModalPage,
+    ResDetailPage
   ],
   providers: [
     StatusBar,

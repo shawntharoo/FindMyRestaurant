@@ -4,14 +4,14 @@ import * as fireStorage from 'firebase/storage';
 import { Observable } from 'rxjs/Observable';
 import { AlertsService } from './alerts.service';
 import { AuthService } from './auth.service';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
 
 @Injectable()
 export class handleDataService {
     validEmail: string;
     public userProfile;
     storageRef: firebase.storage.Reference;
-    restaurants: FirebaseListObservable<any[]>;
+    restaurants: AngularFireList<any[]>;
 
     constructor(public alertService: AlertsService, public authService: AuthService, public af: AngularFireDatabase) {
     }

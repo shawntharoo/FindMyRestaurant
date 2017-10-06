@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { handleDataService } from '../providers/handleData.service';
 import { seekerData } from '../../Models/SeekerDetails';
@@ -14,7 +14,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class SeekerSettingsPage implements OnInit {
 
   captureDataUrl: string;
-  profile: FirebaseObjectObservable<seekerData[]>;
+  profile;
   private imageSrc: string;
   userImage: string;
   editMode: boolean = false;
@@ -31,7 +31,7 @@ export class SeekerSettingsPage implements OnInit {
 
   ngOnInit() {
     this.handleService.getUserEmail().subscribe(res => {
-      this.handleService.seekerDetails(res.email).subscribe(response => {
+      this.handleService.seekerDetails(res.email).valueChanges().subscribe(response => {
         this.profile = response;
       });
       this.handleService.firebaseStorageDownload(res.email).then(url => this.userImage = url);

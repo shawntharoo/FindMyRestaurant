@@ -8,12 +8,12 @@
 
 <ion-content class="card-background-page">
   <ion-list>
-    <ion-item *ngFor="let item of items | async">
+    <ion-item *ngFor="let restaurant of restaurants | async">
       <ion-thumbnail item-start>
         <img src="img/thumbnail-totoro.png">
       </ion-thumbnail>
-      <h2>{{item.Name}}</h2>
-      <h3>{{item.Description}}</h3>
+      <h2>{{restaurant.Name}}</h2>
+      <h3>{{restaurant.Description}}</h3>
       <button ion-button clear item-end>View</button>
     </ion-item>
   </ion-list>

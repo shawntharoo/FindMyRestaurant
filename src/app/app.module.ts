@@ -8,6 +8,7 @@ import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 //Component imports
 import { MyApp } from './app.component';
@@ -50,6 +51,8 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

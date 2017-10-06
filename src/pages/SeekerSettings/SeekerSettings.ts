@@ -4,6 +4,7 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { handleDataService } from '../providers/handleData.service';
 import { seekerData } from '../../Models/SeekerDetails';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'Page-SeekerSettings',
@@ -17,11 +18,15 @@ export class SeekerSettingsPage implements OnInit {
   private imageSrc: string;
   userImage: string;
   editMode: boolean = false;
-
+  form: FormGroup;
   constructor(public navCtrl: NavController, public af: AngularFireDatabase, private camera: Camera, public handleService: handleDataService) {
     // af.object('/UserProfile/s@g,com').subscribe(snapshot => {
     //     console.log(snapshot);
     // });
+    this.form = new FormGroup({
+      place: new FormControl(),
+      category: new FormControl()
+    })
   }
 
   ngOnInit() {
@@ -75,4 +80,12 @@ export class SeekerSettingsPage implements OnInit {
     this.editMode = !this.editMode;
   }
 
+  editedSeekerData() {
+    this.handleService.getUserEmail().subscribe(res => {
+      this.handleService.updateSeeker(this.form.value, res.email).then(data => {
+        let res = data;
+        console.log("Successfully Saved", res)
+      });
+    });
+  }
 }

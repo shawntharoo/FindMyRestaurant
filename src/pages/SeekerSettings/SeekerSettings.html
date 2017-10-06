@@ -18,16 +18,16 @@
   <div text-center>
     <div text-center>
       <img *ngIf="userImage && !imageSrc && !captureDataUrl" [src]="userImage" />
+      <img [src]="captureDataUrl" *ngIf="captureDataUrl || imageSrc" />
     </div>
-    <button ion-button color="light" icon-right (click)="capture()" *ngIf="!captureDataUrl">
+    <button ion-button color="light" icon-right (click)="capture()" *ngIf="!captureDataUrl &&  !imageSrc">
             Take Picture
             <ion-icon name="camera"></ion-icon>
         </button>
-    <button ion-button color="light" icon-left on-tap="openGallery()" *ngIf="!imageSrc">
+    <button ion-button color="light" icon-left on-tap="openGallery()" *ngIf="!captureDataUrl &&  !imageSrc">
             Choose Image
             <ion-icon name="image"></ion-icon>
         </button>
-    <img [src]="captureDataUrl" *ngIf="captureDataUrl || imageSrc" />
     <button ion-button color="light" icon-only (click)="uploadImage()" *ngIf="captureDataUrl || imageSrc">
           <ion-icon name="cloud-upload"></ion-icon>
         </button>
@@ -56,8 +56,26 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="editMode">
-    Edit mode enabled
+
+  <ion-card *ngIf="profile && editMode">
+    <ion-title>
+      Primary Information
+    </ion-title>
+    <form [formGroup]="form" (ngSubmit)="editedSeekerData()">
+      <ion-card-content>
+        <ion-item>
+          <ion-label stacked>Living Place</ion-label>
+          <ion-input type="text" formControlName="place" value="{{profile.LivingPlace}}"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-item>
+          <ion-label stacked>Food Category</ion-label>
+          <ion-input type="text" formControlName="category" value="{{profile.FoodCategory}}"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <button type="submit" ion-button block>Submit</button>
+    </form>
   </ion-card>
 
 </ion-content>

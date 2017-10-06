@@ -4,13 +4,14 @@ import * as fireStorage from 'firebase/storage';
 import { Observable } from 'rxjs/Observable';
 import { AlertsService } from './alerts.service';
 import { AuthService } from './auth.service';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Injectable()
 export class handleDataService {
     validEmail: string;
     public userProfile;
     storageRef: firebase.storage.Reference;
+    restaurants: FirebaseListObservable<any[]>;
 
     constructor(public alertService: AlertsService, public authService: AuthService, public af: AngularFireDatabase) {
     }
@@ -60,14 +61,6 @@ export class handleDataService {
         });
     }
 
-    // seekerDetails() {
-    //      this.authService.user.subscribe(res => {
-    //         let useEmail = this.emailToKey(res.email);
-    //          this.userProfile = firebase.database().ref(`/UserProfile/${useEmail}`).limitToFirst(1);
-    //          console.log(this.userProfile);
-    //     });
-    // }
-
     getUserEmail() {
         return this.authService.user;
     }
@@ -78,9 +71,22 @@ export class handleDataService {
     }
 
     firebaseStorageDownload(imageUrl) {
-        this.storageRef = firebase.storage().ref().child('SeekerProfile/'+imageUrl+'.jpg');
+        this.storageRef = firebase.storage().ref().child('SeekerProfile/' + imageUrl + '.jpg');
         // this.storageRef.getDownloadURL().then(url => console.log(url));
         return this.storageRef.getDownloadURL();
     }
 
+    updateSeeker(data, email) {
+        let userEmail = this.emailToKey(email);
+        return this.af.object('/UserProfile/' + userEmail).update({
+            LivingPlace: data.place,
+            FoodCategory: data.category
+        })
+    }
+
+    getRestaurants(email) {
+        let userEmail = this.emailToKey(email);
+        this.restaurants = this.af.list('/Restaurants/' + userEmail);
+        return this.restaurants;
+    }
 }

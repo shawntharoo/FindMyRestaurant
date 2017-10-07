@@ -4,16 +4,17 @@ import * as fireStorage from 'firebase/storage';
 import { Observable } from 'rxjs/Observable';
 import { AlertsService } from './alerts.service';
 import { AuthService } from './auth.service';
-import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable()
 export class handleDataService {
     validEmail: string;
     public userProfile;
     storageRef: firebase.storage.Reference;
-    restaurants: AngularFireList<any[]>;
+    restaurants;
 
     constructor(public alertService: AlertsService, public authService: AuthService, public af: AngularFireDatabase) {
+
     }
 
     registerRole(email, role) {
@@ -55,10 +56,10 @@ export class handleDataService {
         });
     }
 
-    ownerHotels() {
-        this.authService.user.subscribe(res => {
-            firebase.database().ref('Restaurants/' + this.emailToKey(res.email));
-        });
+    ownerHotels(email) {
+        let userEmail = this.emailToKey(email);
+        this.restaurants = this.af.list('/Restaurants/' + userEmail);
+        return this.restaurants;
     }
 
     getUserEmail() {
@@ -84,9 +85,8 @@ export class handleDataService {
         })
     }
 
-    getRestaurants(email) {
-        let userEmail = this.emailToKey(email);
-        this.restaurants = this.af.list('/Restaurants/' + userEmail);
+    getRestaurants() {
+        this.restaurants = this.af.list('/Restaurants')
         return this.restaurants;
     }
 }

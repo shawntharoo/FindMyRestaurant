@@ -7,13 +7,15 @@
 </ion-header>
 
 <ion-content class="card-background-page">
-  <ion-list>
-    <ion-item *ngIf="item">
-      <ion-thumbnail item-start>
-        <img src="img/thumbnail-totoro.png">
-      </ion-thumbnail>
-      <h2>{{item.Name}}</h2>
-      <h3>{{item.Description}}</h3>
-    </ion-item>
-  </ion-list>
+  <ion-card>
+    <img src="img/nin-live.png" />
+    <ion-card-content>
+      <ion-card-title>
+        {{item.Name}}
+      </ion-card-title>
+      <p>
+        {{item.Description}}
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

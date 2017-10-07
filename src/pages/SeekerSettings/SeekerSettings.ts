@@ -3,7 +3,6 @@ import { NavController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { handleDataService } from '../providers/handleData.service';
-import { seekerData } from '../../Models/SeekerDetails';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({

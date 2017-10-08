@@ -4,7 +4,7 @@ import * as fireStorage from 'firebase/storage';
 import { Observable } from 'rxjs/Observable';
 import { AlertsService } from './alerts.service';
 import { AuthService } from './auth.service';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class handleDataService {
@@ -12,6 +12,7 @@ export class handleDataService {
     public userProfile;
     storageRef: firebase.storage.Reference;
     restaurants;
+    firestore = fireStorage.storage().ref();
 
     constructor(public alertService: AlertsService, public authService: AuthService, public af: AngularFireDatabase) {
 
@@ -39,20 +40,27 @@ export class handleDataService {
     }
 
     upload(captureDataUrl) {
-        let storageRef = fireStorage.storage().ref();
-        const filename = Math.floor(Date.now() / 1000);
-        const imageRef = storageRef.child(`Restaurants/${filename}.jpg`);
-        imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot) => {
-            this.alertService.showAlert("success", "Successfully Uploaded");
+        this.authService.user.subscribe(res => {
+            const imageRef = this.firestore.child(`SeekerProfile/${res.email}.jpg`);
+            imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot) => {
+                this.alertService.showAlert("success", "Successfully Uploaded");
+            })
         });
     }
 
-    createHotel(hotel) {
+    createHotel(hotel, imgBlob) {
         this.authService.user.subscribe(res => {
             this.af.list('Restaurants/' + this.emailToKey(res.email)).push({
                 Name: hotel.name,
                 Description: hotel.description
             });
+
+            var imageStore = this.firestore.child('Restaurants/' + this.emailToKey(res.email) + '/' + hotel.name);
+            imageStore.put(imgBlob).then((res) => {
+                this.alertService.showAlert("success", "Successfully Uploaded");
+            }).catch((err) => {
+                this.alertService.showAlert("Error", "Uploade failed");
+            })
         });
     }
 

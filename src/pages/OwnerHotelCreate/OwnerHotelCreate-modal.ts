@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewController } from 'ionic-angular';
 import { handleDataService } from '../providers/handleData.service';
 import { FileChooser } from '@ionic-native/file-chooser';
-import firebase from 'firebase';
 
 @Component({
     selector: 'ownerHotelCreate-modal',
@@ -13,7 +12,7 @@ export class OwnerHotelCreateModalPage {
 
     form: FormGroup;
     nativepath: any;
-    firestore = firebase.storage();
+    imgBlob : String;
 
     constructor(public viewCtrl: ViewController, formBuilder: FormBuilder, public handleService: handleDataService, public fileChooser: FileChooser) {
         this.form = formBuilder.group({
@@ -27,7 +26,7 @@ export class OwnerHotelCreateModalPage {
     }
 
     createItem() {
-        this.handleService.createHotel(this.form.value);
+        this.handleService.createHotel(this.form.value, this.imgBlob);
         this.viewCtrl.dismiss();
     }
 
@@ -45,15 +44,9 @@ export class OwnerHotelCreateModalPage {
         (<any>window).resolveLocalFileSystemURL(this.nativepath, (res) => {
             res.file((resFile) => {
                 var reader = new FileReader();
-                reader.readAsArrayBuffer(resFile);
+                reader.readAsBinaryString(resFile);
                 reader.onloadend = (evt: any) => {
-                    var imgBlob = new Blob([evt.target.result], { type: 'image/jpeg' });
-                    var imageStore = this.firestore.ref().child('Restaurants');
-                    imageStore.put(imgBlob).then((res) => {
-                        alert('Upload Success');
-                    }).catch((err) => {
-                        alert('Upload Failed' + err);
-                    })
+                    this.imgBlob = btoa(evt.target.result);
                 }
             })
         })

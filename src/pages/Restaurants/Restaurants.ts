@@ -11,18 +11,23 @@ import { ResDetailPage } from './ResDetails/ResDetailPage';
 })
 
 export class RestaurantsPage {
-  private base64textString:String="";
-  restaurants: Observable<any[]>;
+  restaurants: any[];
+  dataStore: Observable<any[]>
   constructor(public navCtrl: NavController, public af: AngularFireDatabase, public dataservice: handleDataService) {
     this.dataservice.getUserEmail().subscribe(res => {
-      this.restaurants = this.dataservice.getRestaurants().valueChanges();
-    })
-    // this.items.subscribe(res => console.log(res[0].$key));
+      this.dataservice.getRestaurants().snapshotChanges().subscribe(actions => {
+        actions.forEach(action => {
+         // console.log(action.payload.val());
+          this.dataStore = this.dataservice.getResturantsFromKeys(action.key).valueChanges();
+          this.restaurants.push(this.dataStore);
+        });
+      });
+    });
   }
 
-  gotoPage(restaurant){
-    this.navCtrl.push(ResDetailPage,{
-      item : restaurant
+  gotoPage(restaurant) {
+    this.navCtrl.push(ResDetailPage, {
+      item: restaurant
     });
   }
 

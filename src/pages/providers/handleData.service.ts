@@ -11,7 +11,6 @@ export class handleDataService {
     validEmail: string;
     public userProfile;
     storageRef: firebase.storage.Reference;
-    restaurants;
 
     constructor(public alertService: AlertsService, public authService: AuthService, public af: AngularFireDatabase) {
 
@@ -65,8 +64,8 @@ export class handleDataService {
 
     ownerHotels(email) {
         let userEmail = this.emailToKey(email);
-        this.restaurants = this.af.list('/Restaurants/' + userEmail);
-        return this.restaurants;
+        let restaurants = this.af.list('/Restaurants/' + userEmail);
+        return restaurants;
     }
 
     getUserEmail() {
@@ -93,8 +92,13 @@ export class handleDataService {
     }
 
     getRestaurants() {
-        this.restaurants = this.af.list('/Restaurants')
-        return this.restaurants;
+        let restaurants = this.af.list('/Restaurants');
+        return restaurants;
+    }
+
+    getResturantsFromKeys(key){
+        let rest = this.af.list('/Restaurants/'+ key);
+        return rest;
     }
 
 

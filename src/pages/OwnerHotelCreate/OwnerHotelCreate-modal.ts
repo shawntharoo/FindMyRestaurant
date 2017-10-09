@@ -26,6 +26,7 @@ export class OwnerHotelCreateModalPage {
     }
 
     createItem() {
+        console.log(this.imgBlob)
         this.handleService.createHotel(this.form.value, this.imgBlob);
         this.viewCtrl.dismiss();
     }

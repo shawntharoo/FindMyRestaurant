@@ -15,6 +15,7 @@ export class OwnerHotelsDisplayPage {
     constructor(public modal: ModalController, public handleService: handleDataService) {
         this.handleService.getUserEmail().subscribe(res => {
             this.restaurants = this.handleService.ownerHotels(res.email).valueChanges();
+            // this.handleService.getRetuarantImageformStorage(res.email);
         })
     }
 

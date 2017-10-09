@@ -12,7 +12,6 @@ export class handleDataService {
     public userProfile;
     storageRef: firebase.storage.Reference;
     restaurants;
-    firestore = fireStorage.storage().ref();
 
     constructor(public alertService: AlertsService, public authService: AuthService, public af: AngularFireDatabase) {
 
@@ -41,7 +40,7 @@ export class handleDataService {
 
     upload(captureDataUrl) {
         this.authService.user.subscribe(res => {
-            const imageRef = this.firestore.child(`SeekerProfile/${res.email}.jpg`);
+            const imageRef = firebase.storage().ref().child(`SeekerProfile/${res.email}.jpg`);
             imageRef.putString(captureDataUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot) => {
                 this.alertService.showAlert("success", "Successfully Uploaded");
             })
@@ -55,7 +54,7 @@ export class handleDataService {
                 Description: hotel.description
             });
 
-            var imageStore = this.firestore.child('Restaurants/' + this.emailToKey(res.email) + '/' + hotel.name);
+            var imageStore = firebase.storage().ref().child('Restaurants/' + this.emailToKey(res.email) + '/' + hotel.name);
             imageStore.put(imgBlob).then((res) => {
                 this.alertService.showAlert("success", "Successfully Uploaded");
             }).catch((err) => {
@@ -96,5 +95,11 @@ export class handleDataService {
     getRestaurants() {
         this.restaurants = this.af.list('/Restaurants')
         return this.restaurants;
+    }
+
+
+    getRetuarantImageformStorage(res, hotelName) {
+        this.storageRef = firebase.storage().ref().child('Restaurants/' + this.emailToKey(res.email) + '/' + hotelName);
+        return this.storageRef.getDownloadURL();
     }
 }

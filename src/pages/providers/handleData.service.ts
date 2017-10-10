@@ -95,8 +95,8 @@ export class handleDataService {
         return restaurants;
     }
 
-    getResturantsFromKeys(key){
-        let rest = this.af.list('/Restaurants/'+ key);
+    getResturantsFromKeys(key) {
+        let rest = this.af.list('/Restaurants/' + key);
         return rest;
     }
 

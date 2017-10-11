@@ -21,8 +21,7 @@ export class RestaurantsPage {
           this.allRestaurants = this.dataservice.getResturantsFromKeys(action.key).valueChanges();
           this.allRestaurants.subscribe(res => {
             res.forEach(element => {
-              this.dataservice.getRetuarantImageformStorage(res, element.Name);
-              console.log(element);
+              //this.dataservice.getRetuarantImageformStorage(res, element.Name);
               this.restaurants.push(element);
             });
           });

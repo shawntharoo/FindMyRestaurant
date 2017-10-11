@@ -91,7 +91,8 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-googlemaps" spec="^2.0.11">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCQrmmr89A3DA2Nvxf1XzWRe2WGE5nr7qI" />
-        <variable name="API_KEY_FOR_IOS" value="AIzaSyA_29ol9zg44jRyeIG2gutKwEm8CSnRNV0" />
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBph0GOrREHKJ7UVJECK6tY-xVf97_-diE" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyCDqAq8-CH7F1_tc8RS2fYl1No2K9JJnvI" />
     </plugin>
+    <plugin name="cordova-plugin-geolocation" spec="^2.4.3" />
 </widget>

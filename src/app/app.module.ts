@@ -10,6 +10,7 @@ import { Camera } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 
 //Component imports
 import { MyApp } from './app.component';
@@ -26,6 +27,8 @@ import { AlertsService } from '../pages/providers/alerts.service';
 import { handleDataService } from '../pages/providers/handleData.service';
 import { ResDetailPage } from '../pages/Restaurants/ResDetails/ResDetailPage';
 import { OwnerDisplaData } from '../pages/OwnerHotelsDisplay/OwnerDisplayDetail/OwnerDisplayData';
+import { MapPage } from '../pages/Map/map';
+import { JavascriptMap } from '../pages/MapJavascript/MapJavascript';
 
 //Firebase configurations and imports
 import { AngularFireModule } from 'angularfire2';
@@ -52,7 +55,9 @@ export const firebaseConfig = {
     OwnerHotelsDisplayPage,
     OwnerHotelCreateModalPage,
     ResDetailPage,
-    OwnerDisplaData
+    OwnerDisplaData,
+    MapPage,
+    JavascriptMap
   ],
   imports: [
     BrowserModule,
@@ -75,7 +80,9 @@ export const firebaseConfig = {
     OwnerHotelsDisplayPage,
     OwnerHotelCreateModalPage,
     ResDetailPage,
-    OwnerDisplaData
+    OwnerDisplaData,
+    MapPage,
+    JavascriptMap
   ],
   providers: [
     StatusBar,
@@ -86,6 +93,7 @@ export const firebaseConfig = {
     Camera,
     FilePath,
     GoogleMaps,
+    Geolocation,
     AuthService,
     AlertsService,
     handleDataService,

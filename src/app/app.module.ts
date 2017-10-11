@@ -9,6 +9,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 //Component imports
 import { MyApp } from './app.component';
@@ -84,6 +85,7 @@ export const firebaseConfig = {
     Transfer,
     Camera,
     FilePath,
+    GoogleMaps,
     AuthService,
     AlertsService,
     handleDataService,

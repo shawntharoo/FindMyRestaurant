@@ -34,7 +34,6 @@ import { JavascriptMap } from '../pages/MapJavascript/MapJavascript';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 export const firebaseConfig = {
   apiKey: "AIzaSyBuQKvPkP3mohnOUK580-S24M6jocPVkqE",
   authDomain: "mymenu-fab5b.firebaseapp.com",
@@ -67,7 +66,6 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFirestoreModule.enablePersistence(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],

@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
-//https://www.joshmorony.com/ionic-2-how-to-use-google-maps-geolocation-video-tutorial/
 declare var google;
 @Component({
     selector: 'JavascriptMap',
@@ -12,6 +11,8 @@ export class JavascriptMap {
     @ViewChild('map') mapElement: ElementRef;
     @ViewChild('search') SearchBox: ElementRef;
     map: any;
+    searchBox: any;
+    input: any;
 
     constructor(public navCtrl: NavController, public geolocation: Geolocation) {
 
@@ -30,15 +31,15 @@ export class JavascriptMap {
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             }
             this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-            var input = this.SearchBox.nativeElement;
-            var searchBox = new google.maps.places.SearchBox(input);
-            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-            this.map.addListener(() => {
-                searchBox.setBounds(this.map.getBounds());
+            this.input = this.SearchBox.nativeElement;
+            this.searchBox = new google.maps.places.SearchBox(this.input);
+            this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.input);
+            this.map.addListener('bounds_changed', () => {
+                this.searchBox.setBounds(this.map.getBounds());
             });
             var markers = [];
-            searchBox.addListener(() => {
-                var places = searchBox.getPlaces();
+            this.searchBox.addListener('places_changed', () => {
+                var places = this.searchBox.getPlaces();
 
                 if (places.length == 0) {
                     return;
@@ -52,8 +53,7 @@ export class JavascriptMap {
 
                 // For each place, get the icon, name and location.
                 var bounds = new google.maps.LatLngBounds();
-                console.log(this);
-                places.forEach(function (this,place) {
+                places.forEach(place => {
                     if (!place.geometry) {
                         console.log("Returned place contains no geometry");
                         return;
@@ -65,15 +65,14 @@ export class JavascriptMap {
                         anchor: new google.maps.Point(17, 34),
                         scaledSize: new google.maps.Size(25, 25)
                     };
-console.log(this);
                     // Create a marker for each place.
                     markers.push(
                         new google.maps.Marker({
-                        map: this.map,
-                        icon: icon,
-                        title: place.name,
-                        position: place.geometry.location
-                    }));
+                            map: this.map,
+                            icon: icon,
+                            title: place.name,
+                            position: place.geometry.location
+                        }));
 
                     if (place.geometry.viewport) {
                         // Only geocodes have viewport.

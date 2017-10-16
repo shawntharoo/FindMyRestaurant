@@ -105,4 +105,26 @@ export class handleDataService {
         this.storageRef = firebase.storage().ref().child('Restaurants/' + this.emailToKey(res.email) + '/' + hotelName);
         return this.storageRef.getDownloadURL();
     }
+
+    getMapPositions(res) {
+        let map = this.af.object('/UserProfile/' + this.emailToKey(res.email));
+        return map;
+    }
+
+    updateMap(place) {
+        this.authService.user.subscribe(res => {
+            return this.af.object('/UserProfile/' + this.emailToKey(res.email)).update({
+                Place: place,
+            })
+        });
+    }
+
+    updateMapPlace(latitude, longitude){
+        this.authService.user.subscribe(res => {
+            return this.af.object('/UserProfile/' + this.emailToKey(res.email)).update({
+                latitude: latitude,
+                longitude: longitude
+            })
+        })
+    }
 }

@@ -4,6 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { handleDataService } from '../providers/handleData.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { JavascriptMap } from '../MapJavascript/MapJavascript';
 
 @Component({
   selector: 'Page-SeekerSettings',
@@ -11,7 +12,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 
 export class SeekerSettingsPage implements OnInit {
-
   captureDataUrl: string;
   profile;
   private imageSrc: string;
@@ -87,4 +87,11 @@ export class SeekerSettingsPage implements OnInit {
       });
     });
   }
+
+  loadMap(){
+        this.navCtrl.push(JavascriptMap, {
+        map: "restaurant"
+    });
+  }
+
 }

@@ -1,14 +1,12 @@
-<ion-header>
-    <ion-navbar>
-        <ion-title>
-            Google map
-        </ion-title>
-        <ion-buttons end>
-            <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon>Add Marker </button>
-        </ion-buttons>
-    </ion-navbar>
-</ion-header>
 <ion-content>
     <input #search id="pac-input" class="controls" type="text" placeholder="Search Box">
     <div #map id="map"> </div>
+    <br/>
+    <h2>Description of the place</h2>
+    <form (ngSubmit)="save()">
+        <ion-item>
+            <ion-textarea [(ngModel)]="placeDescription" name="description"></ion-textarea>
+        </ion-item>
+        <button ion-button type="submit" small>Save</button>
+    </form>
 </ion-content>

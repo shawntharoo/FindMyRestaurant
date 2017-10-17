@@ -12,10 +12,11 @@ export class OwnerHotelCreateModalPage {
 
     form: FormGroup;
     nativepath: any;
-    imgBlob : String;
+    imgBlob: String;
 
     constructor(public viewCtrl: ViewController, formBuilder: FormBuilder, public handleService: handleDataService, public fileChooser: FileChooser) {
         this.form = formBuilder.group({
+            profilePic: [''],
             name: ['', Validators.required],
             description: ['', Validators.required]
         });
@@ -23,6 +24,10 @@ export class OwnerHotelCreateModalPage {
 
     closeModal() {
         this.viewCtrl.dismiss();
+    }
+
+    getProfileImageStyle() {
+        return 'url(' + this.form.controls['profilePic'].value + ')'
     }
 
     createItem() {

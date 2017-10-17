@@ -2,10 +2,11 @@
     <input #search id="pac-input" class="controls" type="text" placeholder="Search Box">
     <div #map id="map"> </div>
     <br/>
-    <h2>Description of the place</h2>
+    <p>Description of the place</p>
     <form (ngSubmit)="save()">
         <ion-item>
-            <ion-textarea [(ngModel)]="placeDescription" name="description"></ion-textarea>
+            <ion-label color="primary" stacked>About the place</ion-label>
+            <ion-input [(ngModel)]="placeDescription" name="description" placeholder="Enter a description"></ion-input>
         </ion-item>
         <button ion-button type="submit" small>Save</button>
     </form>

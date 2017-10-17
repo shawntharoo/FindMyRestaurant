@@ -12,16 +12,27 @@
 </ion-header>
 
 <ion-content>
-    <form [formGroup]="form" (ngSubmit)="createItem()">
 
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
+        <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
         <div class="profile-image-wrapper" (click)="store()">
+            <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+                <ion-icon name="add"></ion-icon>
+                <div>
+                    choose image
+                </div>
+            </div>
+            <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
+        </div>
+
+        <!--<div class="profile-image-wrapper" (click)="store()">
             <div class="profile-image-placeholder">
                 <ion-icon name="add"></ion-icon>
                 <div>
                     Choose Image
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <ion-list>
             <ion-item>
@@ -31,6 +42,12 @@
                 <ion-textarea type="text" placeholder="Description" formControlName="description"></ion-textarea>
             </ion-item>
         </ion-list>
-        <button ion-button full color="secondary">Full Button</button>
+        <button ion-button color="primary">Save</button>
     </form>
+    <br/>
+    <ion-title>
+        Location Details
+    </ion-title>
+    <br/>
+    <JavascriptMap></JavascriptMap>
 </ion-content>

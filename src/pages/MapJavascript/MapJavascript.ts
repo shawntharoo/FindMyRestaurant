@@ -17,11 +17,11 @@ export class JavascriptMap {
     placeDescription: any;
 
     constructor(public navCtrl: NavController, public geolocation: Geolocation, public handleData: handleDataService) {
-
+        this.loadMap();
     }
 
     ionViewDidLoad() {
-        this.loadMap();
+        // this.loadMap();
     }
 
     loadMap() {

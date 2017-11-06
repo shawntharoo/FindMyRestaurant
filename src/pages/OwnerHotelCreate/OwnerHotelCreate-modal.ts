@@ -50,9 +50,9 @@ export class OwnerHotelCreateModalPage {
         (<any>window).resolveLocalFileSystemURL(this.nativepath, (res) => {
             res.file((resFile) => {
                 var reader = new FileReader();
-                reader.readAsBinaryString(resFile);
+                reader.readAsDataURL(resFile);
                 reader.onloadend = (evt: any) => {
-                    this.imgBlob = btoa(evt.target.result);
+                    this.imgBlob = reader.result;
                 }
             })
         })
